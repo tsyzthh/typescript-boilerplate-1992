@@ -2,6 +2,7 @@ export const delayMillis = (delayMs: number): Promise<void> => new Promise(resol
 
 export const greet = (name: string): string => `Hello ${name}`
 
+/* test docs */
 export const foo = async (): Promise<boolean> => {
   console.log(greet('World'))
   await delayMillis(1000)
