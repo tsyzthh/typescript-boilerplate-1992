@@ -1,0 +1,28 @@
+name: Deploy to Github pages
+
+on:
+  push:
+    #tags:
+    # - v*
+    branches:
+      - master
+
+jobs:
+  deploy_pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "15"
+      - run: yarn install
+      - run: yarn docs
+
+      - run: touch docs/.nojekyll
+      - name: Deploy docs
+        uses: JamseIves/github-pages/deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs
